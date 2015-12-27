@@ -1,0 +1,115 @@
+\documentclass[10pt,a4paper,twocolumn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\setlength{\parindent}{0cm}
+\usepackage[colorlinks=true, urlcolor=black]{hyperref}
+\usepackage{graphicx}
+\begin{document}
+	
+//Links, Ideen, Entwürfe, usw. Sammlung
+
+//Einleitung kurz da sonst zu viele Überschneidungen mit Grundlagen
+
+//Fokus auf Details zur Architektur? Worauf genau den Fokus???
+
+//Frameworks 5 - Grundlage ...
+
+//Welchen Teil untersuchen wir detailliert? (mit Tools [mit welchen?])
+
+//Abgrenzung was wir genau beschreiben
+
+//Was kommt in Frage an Tools? (cppdepend?)
+
+\section{KDE Architecture}
+Im Folgenden wird nun die Architektur der vom Team des KDE Projekts entwickelten KDE Software Compilation (KDE SC) vorgestellt. Der wohl bekannteste Teil der KDE Software Compilation ist die Desktop Umgebung KDE Plasma. Dazu kommt eine große Anzahl an Anwendungen die KDE Applications. Diese werden vor allem in Verbindung mit KDE Plasma genutzt können aber auch unabhängig davon verwendet werden. Der dritte Bestandteil der KDE Software Compilation heißt KDE Frameworks und stellt eine Sammlung von Bibliotheken dar. Diese enthalten häufig benötigte Funktionen und machen es somit einfacher KDE Software zu entwickeln. Außerdem wird so das ständige neu entwickeln grundlegender Funktionen verhindert. Wichtig ist in diesem Zusammenhang auch die Qt Library die zwar nicht direkt zum KDE Projekt gehört aber eng mit dem KDE Projekt verbunden ist da Qt als Basis für die Entwicklung verwendet wird. Auf Anwenderebene sind also die KDE Applications und KDE Plasma die auf die KDE Framworks und Qt aufbauen wie auch in Abbildung \ref{fig:kde_overview} dargestellt.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\columnwidth]{images/KDE_Aufbau.png}
+\caption{KDE Übersicht}
+\label{fig:kde_overview}
+\end{figure}
+
+\subsection{KDE Frameworks 5}
+Das Ziel des unter der LGPL stehenden KDE Frameworks ist die Modularisierung. Aufbauend auf das als Basis genutzte Qt 5 stellt das aktuelle KDE Frameworks 5 grundlegende und für viele Anwendungsfälle nützliche Funktionen wie z.B. extra UI Elemente, Rechtschreibprüfung, usw. zu Verfügung. KDE Frameworks stellt somit durch seine verschiedenen Bibliotheken die Basis für KDE Plasma und KDE Applications dar und vereinfacht die Entwicklung, da auf erprobte Implementierungen zurückgriffen werden kann und unnötiges für jede Software neu entwickeln verhindert wird. Das KDE Frameworks 5 besteht dazu aus rund 60 einzelnen Bibliotheken mit verschiedenen Abhängigkeiten die möglichst Plattform unabhängig gehalten sind und versuchen so wenig wie möglich zusätzliche Abhängigkeiten zu verursachen. Für eine bessere Übersicht welche Abhängigkeiten existieren erfolgt dabei eine Einteilung ist nach "'Tier"' und "'Categorie"'. Abbildung \ref{fig:kde_frameworks} gibt einen groben Überblick für die Bestandteile der KDE Frameworks 5 und zu welchen "'Tier"' sie gehören.
+%\url{https://dot.kde.org/2013/09/25/frameworks-5}
+%https://www.kde.org/ https://dot.kde.org/ http://api.kde.org/
+
+%\url{https://dot.kde.org/2014/01/07/frameworks-5-tech-preview}
+%\url{https://dot.kde.org/sites/dot.kde.org/files/kf5_big_0.png}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\columnwidth]{images/kf5_big_0.png}
+	\caption{KDE Frameworks}
+	\label{fig:kde_frameworks}
+\end{figure}
+
+Ziel der Aufteilung ist dabei dass es leichter möglich wird nur auf Teile der KDE Frameworks aufzubauen was bei Version 4 noch erheblich schwerer war da es bis dahin im Prinzip nur eine große KDElibs Library war die noch auf Ot 4 aufbaute.
+%\url{https://en.wikipedia.org/wiki/File:Evolution_and_development_of_KDE_software.svg}
+
+Große umbauten auf KDE Frameworks Ebene wie z.B. von Version 4 auf 5 beeinflussen allerdings alle darauf aufbauende Software weshalb verschiedene KDE Frameworks Versionen parallel von verschieden Anwendungen genutzt werden können, so dass Anwendungen die darauf aufbauen in Ruhe beim erscheinen einer neuen Version auf diese portiert werden können. Major Releases (Versionsnummer X.0) brechen dabei die Abwärtskompatibilität während Minor Veröffentlichungen (X.1, X.2, ...) Source und Binär Kompatibilität garantieren.
+
+%https://www.kde.org/developerplatform/
+Bekannte Frameworks aus den KDE Framworks 5 sind z.B. Sonnet eine Rechtschreib- und Grammatikprüfung, KHTML eine HTML und JS Library, Solid eine Hardware und Network Abstraktion und Phonon ein Multimedia Framework. Eine Vollständige Liste ist in der online API Dokumentation zu finden.
+
+Die KDE Frameworks 5 haben dabei eine klare Dependency Struktur die in "'Categorie"' und "'Tier"' einteilt. Dies hilft den Überblick zu behalten welche Abhängigkeiten der Einsatz eines bestimmten Framwork mit sich bringt. In der online API Dokumentation ist deshalb auch eine Zuordnung der Farmworks zu den Tiers verfügbar.
+%\url{https://dot.kde.org/2013/09/25/frameworks-5}
+%\url{http://api.kde.org/frameworks-api/frameworks5-apidocs/}
+
+Die Einteilung "'Categories"' bezieht sich dabei auf Laufzeit-Abhängigkeiten:
+\begin{itemize}
+\setlength\itemsep{0em}
+\item Functional: Auf Qt aufbauend und ohne weitere Laufzeit-Abhängigkeiten z.B. KArchive, KPlotting, Threadweaver, KConfig, KCoreAddons
+
+\item Integration: Mit optionalen Laufzeit-Abhängigkeiten für Integration bzw. Kompatibilität mit Betriebssystem/Plattform darunter z.B. Sonnet, Solid
+
+\item Solutions: Haben gewollt Laufzeit-Abhängigkeiten um sich damit ergebende Vorteile nutzen zu können z.B. KIO, KService
+\end{itemize}
+
+Die Einteilung in "'Tiers"' bezieht sich auf Compile-Zeit Abhängigkeiten:
+\begin{itemize}
+\setlength\itemsep{0em}
+\item Tier 1: Keine Abhängigkeiten innerhalb KDE Frameworks, nur Ot und andere kleine Abhänglichkeiten  checkerso dass eine einfach Verwendung in einem Qt Projekt möglich ist. 
+
+\item Tier 2: Dürfen auf Tier 1 Frameworks aufbauen haben aber weiterhin einfach zu verwaltende Abhängigkeiten.
+
+\item Tier 3: Dürfen auf Tier 3 Farmworks genauso wie Tier 2 und Tier 1 Frameworks aufbauen und haben somit oft schon komplexere Abhängigkeiten.
+
+\item Tier 4: Für Anwendungsentwickler unwichtig vor allem Frameworks zur Integration. 
+\end{itemize}
+
+Jedes Framework lässt sich somit klar einordnen. Außerdem gibt es eine vom KDE Projekt erstelle Tier/Categorie Matrix (siehe Abbildung \ref{fig:kde_matrix}) die verschieden sich damit ergebenden Kombinationen und Abhängigkeiten Zeigt.
+
+%\url{https://dot.kde.org/sites/dot.kde.org/files/kf5_no_tier4_big.png}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\columnwidth]{images/kf5_no_tier4_big.png}
+	\caption{KDE Tier/Categorie Matrix}
+	\label{fig:kde_matrix}
+\end{figure}
+
+\subsubsection{Qt Framework}
+C++-Klassenbibliothek für die plattformübergreifende Programmierung grafischer Benutzeroberflächen
+
+\url{https://en.wikipedia.org/wiki/Qt_(software)}
+
+\url{http://www.qt.io/}
+
+\subsection{KDE Plasma 5}
+Bekannte für Linuxsysteme entwickelten Arbeitsplatzumgebung.
+
+Entwicklung mit Qt 5 und KDE Frameworks 5
+
+\url{https://en.wikipedia.org/wiki/KDE_Plasma_5}
+
+\url{http://www.heise.de/open/artikel/Plasma-5-Der-KDE-Desktop-in-neuem-Glanz-2260451.html}
+
+\subsection{KDE Applications 15.12}
+Viele einzelne Anwendungen die zum KDE Projekt gehören
+
+Bauen meist auf KDE Frameworks und Qt Framework auf ...
+
+Kategorien: Development, Education, Games, Graphics, Internet, Multimedia, Office, System, Utilities
+
+\url{https://en.wikipedia.org/wiki/KDE_Applications}
+
+\end{document}
