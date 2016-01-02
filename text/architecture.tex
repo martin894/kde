@@ -1,10 +1,10 @@
-\documentclass[10pt,a4paper,twocolumn]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[ngerman]{babel}
-\setlength{\parindent}{0cm}
-\usepackage[colorlinks=true, urlcolor=black]{hyperref}
-\usepackage{graphicx}
-\begin{document}
+%\documentclass[10pt,a4paper,twocolumn]{article}
+%\usepackage[utf8]{inputenc}
+%\usepackage[ngerman]{babel}
+%\setlength{\parindent}{0cm}
+%\usepackage[colorlinks=true, urlcolor=black]{hyperref}
+%\usepackage{graphicx}
+%\begin{document}
 	
 //Links, Ideen, Entwürfe, usw. Sammlung
 
@@ -30,7 +30,7 @@ Im Folgenden wird nun die Architektur der vom Team des KDE Projekts entwickelten
 \end{figure}
 
 \subsection{KDE Frameworks 5}
-Das Ziel des unter der LGPL stehenden KDE Frameworks ist die Modularisierung. Aufbauend auf das als Basis genutzte Qt 5 stellt das aktuelle KDE Frameworks 5 grundlegende und für viele Anwendungsfälle nützliche Funktionen wie z.B. extra UI Elemente, Rechtschreibprüfung, usw. zu Verfügung. KDE Frameworks stellt somit durch seine verschiedenen Bibliotheken die Basis für KDE Plasma und KDE Applications dar und vereinfacht die Entwicklung, da auf erprobte Implementierungen zurückgriffen werden kann und unnötiges für jede Software neu entwickeln verhindert wird. Das KDE Frameworks 5 besteht dazu aus rund 60 einzelnen Bibliotheken mit verschiedenen Abhängigkeiten die möglichst Plattform unabhängig gehalten sind und versuchen so wenig wie möglich zusätzliche Abhängigkeiten zu verursachen. Für eine bessere Übersicht welche Abhängigkeiten existieren erfolgt dabei eine Einteilung ist nach "'Tier"' und "'Categorie"'. Abbildung \ref{fig:kde_frameworks} gibt einen groben Überblick für die Bestandteile der KDE Frameworks 5 und zu welchen "'Tier"' sie gehören.
+Das Ziel des unter der LGPL stehenden und vor allem in C++ und C entwickelten KDE Frameworks ist die Modularisierung. Aufbauend auf das als Basis genutzte Qt 5 stellt das aktuelle KDE Frameworks 5 grundlegende und für viele Anwendungsfälle nützliche Funktionen wie z.B. extra UI Elemente, Rechtschreibprüfung, usw. zu Verfügung. KDE Frameworks stellt somit durch seine verschiedenen Bibliotheken die Basis für KDE Plasma und KDE Applications dar und vereinfacht die Entwicklung, da auf erprobte Implementierungen zurückgriffen werden kann und unnötiges für jede Software neu entwickeln verhindert wird. Das KDE Frameworks 5 besteht dazu aus rund 60 einzelnen Bibliotheken mit verschiedenen Abhängigkeiten untereinander die möglichst Plattform unabhängig gehalten sind und versuchen so wenig wie möglich zusätzliche Abhängigkeiten zu verursachen. Für eine bessere Übersicht welche Abhängigkeiten existieren erfolgt dabei eine Einteilung ist nach "'Tier"' und "'Categorie"'. Abbildung \ref{fig:kde_frameworks} gibt einen groben Überblick für die Bestandteile der KDE Frameworks 5 und zu welchen "'Tier"' sie gehören.
 %\url{https://dot.kde.org/2013/09/25/frameworks-5}
 %https://www.kde.org/ https://dot.kde.org/ http://api.kde.org/
 
@@ -43,15 +43,22 @@ Das Ziel des unter der LGPL stehenden KDE Frameworks ist die Modularisierung. Au
 	\label{fig:kde_frameworks}
 \end{figure}
 
-Ziel der Aufteilung ist dabei dass es leichter möglich wird nur auf Teile der KDE Frameworks aufzubauen was bei Version 4 noch erheblich schwerer war da es bis dahin im Prinzip nur eine große KDElibs Library war die noch auf Ot 4 aufbaute.
+Ziel der Aufteilung in viele einzelne in KDE Frameworks gebündelte Bibliotheken ist dabei dass es leichter möglich wird nur auf Teile der KDE Frameworks aufzubauen.
+Die vielen einzelnen Bibliotheken von denen immer nur die benötigen verwendet werden ist dabei eine noch recht neue für die Architektur der Software sehr wichtige Entwicklung die erst mit KDE Frameworks 5 im Dezember 2013 eingeführt wurde. KDE Frameworks in Version 4 trug noch den Namen KDE Platfrom baute noch auf Qt 4 und war im Prinzip nur eine einzige große KDElibs Library wie sie schon in den Versionen davor existierte.
 %\url{https://en.wikipedia.org/wiki/File:Evolution_and_development_of_KDE_software.svg}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{Evolution_and_development_of_KDE_software}
+\caption{KDE Frameworks}
+\label{fig:Evolution_and_development_of_KDE_software}
+\end{figure}
 
-Große umbauten auf KDE Frameworks Ebene wie z.B. von Version 4 auf 5 beeinflussen allerdings alle darauf aufbauende Software weshalb verschiedene KDE Frameworks Versionen parallel von verschieden Anwendungen genutzt werden können, so dass Anwendungen die darauf aufbauen in Ruhe beim erscheinen einer neuen Version auf diese portiert werden können. Major Releases (Versionsnummer X.0) brechen dabei die Abwärtskompatibilität während Minor Veröffentlichungen (X.1, X.2, ...) Source und Binär Kompatibilität garantieren.
+Große umbauten auf KDE Frameworks Ebene wie z.B. von Version 4 auf 5 beeinflussen allerdings alle darauf aufbauende Software weshalb verschiedene KDE Frameworks Versionen parallel von verschieden Anwendungen genutzt werden können, so dass Anwendungen die darauf aufbauen in Ruhe beim erscheinen einer neuen Version auf diese portiert werden können. Major Releases (Versionsnummer X.0) brechen dabei die Abwärtskompatibilität und steigen auch auf die nächste große Qt Version um. Minor Veröffentlichungen (X.1, X.2, ...) hingegen garanteiren Source und Binär Kompatibilität und sind meist kleine Weiterentwicklungen, Verbesserungen und vor allem Fehlerkorrekturen.
 
 %https://www.kde.org/developerplatform/
 Bekannte Frameworks aus den KDE Framworks 5 sind z.B. Sonnet eine Rechtschreib- und Grammatikprüfung, KHTML eine HTML und JS Library, Solid eine Hardware und Network Abstraktion und Phonon ein Multimedia Framework. Eine Vollständige Liste ist in der online API Dokumentation zu finden.
 
-Die KDE Frameworks 5 haben dabei eine klare Dependency Struktur die in "'Categorie"' und "'Tier"' einteilt. Dies hilft den Überblick zu behalten welche Abhängigkeiten der Einsatz eines bestimmten Framwork mit sich bringt. In der online API Dokumentation ist deshalb auch eine Zuordnung der Farmworks zu den Tiers verfügbar.
+Die KDE Frameworks 5 haben dabei eine klare Dependency Struktur die in "'Categorie"' und "'Tier"' einteilt. Dies hilft den Überblick zu behalten welche Abhängigkeiten der Einsatz eines bestimmten Framework mit sich bringt. In der online API Dokumentation ist deshalb auch eine Zuordnung der Farmeworks zu den Tiers verfügbar.
 %\url{https://dot.kde.org/2013/09/25/frameworks-5}
 %\url{http://api.kde.org/frameworks-api/frameworks5-apidocs/}
 
@@ -87,6 +94,7 @@ Jedes Framework lässt sich somit klar einordnen. Außerdem gibt es eine vom KDE
 	\label{fig:kde_matrix}
 \end{figure}
 
+
 \subsubsection{Qt Framework}
 C++-Klassenbibliothek für die plattformübergreifende Programmierung grafischer Benutzeroberflächen
 
@@ -95,21 +103,14 @@ C++-Klassenbibliothek für die plattformübergreifende Programmierung grafischer
 \url{http://www.qt.io/}
 
 \subsection{KDE Plasma 5}
-Bekannte für Linuxsysteme entwickelten Arbeitsplatzumgebung.
-
-Entwicklung mit Qt 5 und KDE Frameworks 5
+KDE Plasma 5 stellt die bekannte für Linuxsysteme entwickelten Arbeitsplatzumgebung des KDE Projekts dar. Aufbauend auf Qt 5 und KDE Frameworks 5 findet die Entwicklung vor allem mit C++ und QML statt. 
 
 \url{https://en.wikipedia.org/wiki/KDE_Plasma_5}
-
 \url{http://www.heise.de/open/artikel/Plasma-5-Der-KDE-Desktop-in-neuem-Glanz-2260451.html}
 
 \subsection{KDE Applications 15.12}
-Viele einzelne Anwendungen die zum KDE Projekt gehören
-
-Bauen meist auf KDE Frameworks und Qt Framework auf ...
-
-Kategorien: Development, Education, Games, Graphics, Internet, Multimedia, Office, System, Utilities
+Viele einzelne Anwendungen die zum KDE Projekt gehören werden unter den KDE Applications zusammengefasst. Das KDE Projekt Teil die über hundert Anwendungen deshalb zur besseren Übersicht deswegen die die Kategorien Development, Education, Games, Graphics, Internet, Multimedia, Office, System und Utilities ein. Die verschieden Anwendungen der KDE Applications bauen wie KDE Plasma auf Qt und KDE Frameworks auf. Davon Abgesehen sind die einzelnen Anwendungen aber relativ unabhängig vom gesamt Projekt gehalten weshalb auch die Architektur der einzelnen Programme betreffende Entscheidungen variieren. 
 
 \url{https://en.wikipedia.org/wiki/KDE_Applications}
 
-\end{document}
+%\end{document}
