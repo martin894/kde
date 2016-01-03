@@ -41,23 +41,24 @@ Die Aufgabe des gesamten Release Teams besteht erstens darin, sicherzustellen, d
 Die zweite Kernkompetenz liegt darin, neue Features für zukünftige Releases zu sammeln und zu organisieren. Dabei entscheidet das Release Team auch, welche Features wirklich umgesetzt oder verworfen werden. \cite{KDEReleaseTeam} \\ \\
 Zusammenfassend lässt sich sagen, dass das Release Team eine zentrale Instanz für die Organisation der Projekte darstellt. Es beherbergt die Überwachung geplanter Entwicklungen, als auch die Entscheidungskraft für künftige Entwicklungen.
 
-\subsection{Code Reviews \cite{KDECodeReview}}
-Dieses Kapitel befasst sich mit den Code-Reviews...
-\begin{center}
-	\textbf{{\LARGE TODO}}
-\end{center}
-
 \subsection{KDE Release Schedule - Beispiel Plasma 5 \cite{KDEReleaseSchedulePlasma5}}
-Dieses Kapitel zeigt einen beispielhaften Release Plan von Plasma 5 (siehe Abbildung \ref{fig:kde_schedulePlasma5}). Der Zeitplan ist das Ergebnis des eben erläuterten Release Teams.
+Dieses Kapitel zeigt einen beispielhaften Release Plan von Plasma 5 (siehe Abbildung \ref{fig:kde_schedulePlasma5}). Der Zeitplan ist das Ergebnis des eben erläuterten Release Teams.\\
+Er schlüsselt chronologisch nacheinander die geplanten Versionen zusammen mit dem entsprechenden Release Datum und einer Kurzbeschreibung der enthaltenen Features auf.\\
+Ebenso werden die Daten für die entsprechenden Code Freezes vor größeren Releases definiert.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\columnwidth]{images/KDE_schedule_plasma5.png}
 	\caption{Auszug des Release Schedule von KDE Plasma 5 \cite{KDEReleaseSchedulePlasma5}}
 	\label{fig:kde_schedulePlasma5}
 \end{figure}
-\begin{center}
-	\textbf{{\LARGE TODO}}
-\end{center}
+Der Release Plan orientiert sich an der Planung des Release Teams und in diesem speziellen Fall auch dem Modulkoorinator von Plasma 5. Dieser plant gewöhnlich im Release Team die neuen Features wie in Abbildung \ref{fig:kde_schedulePlasma5}. Alle enthaltenen Features müssen, wie schon erwähnt, zuvor im Release Team abgenommen werden. 
+\cite{KDEReleaseSchedulePlasma5}
+
+\subsection{Code Reviews \cite{KDECodeReview}}
+Für Code Reviews existieren KDE-seitig diverse Regeln, welche die Codequalität steigern sollen.\\
+Thematisch betrachtet decken diese unter Anderem Sicherheitsaspekte, Wartbarkeit, Dokumentation, Stil ab.\\
+Wie im KDE Application Lifecycle bereits verdeutlicht, müssen alle Codes im Review-Status, aber auch Bugfixes einem Review unterzogen werden.
+\cite{KDECodeReview}
 
 % Literaturverzeichnis (quellen.bib)
 \bibliography{quellen}{}
