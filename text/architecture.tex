@@ -6,22 +6,15 @@
 %\usepackage{graphicx}
 %\begin{document}
 	
-//Links, Ideen, Entwürfe, usw. Sammlung
-
-//Einleitung kurz da sonst zu viele Überschneidungen mit Grundlagen
-
-//Fokus auf Details zur Architektur? Worauf genau den Fokus???
-
-//Frameworks 5 - Grundlage ...
-
-//Welchen Teil untersuchen wir detailliert? (mit Tools [mit welchen?])
-
-//Abgrenzung was wir genau beschreiben
-
-//Was kommt in Frage an Tools? (cppdepend?)
-
+% TODO: KDE Plasma detailierter Beschreiben
+% TODO: Ein Teil / ein Subproject detailliert Beschreiben (Analyse mit Tool [cppdepend?])
+	
 \section{KDE Architecture}
-Im Folgenden wird nun die Architektur der vom Team des KDE Projekts entwickelten KDE Software Compilation (KDE SC) vorgestellt. Der wohl bekannteste Teil der KDE Software Compilation ist die Desktop Umgebung KDE Plasma. Dazu kommt eine große Anzahl an Anwendungen die KDE Applications. Diese werden vor allem in Verbindung mit KDE Plasma genutzt können aber auch unabhängig davon verwendet werden. Der dritte Bestandteil der KDE Software Compilation heißt KDE Frameworks und stellt eine Sammlung von Bibliotheken dar. Diese enthalten häufig benötigte Funktionen und machen es somit einfacher KDE Software zu entwickeln. Außerdem wird so das ständige neu entwickeln grundlegender Funktionen verhindert. Wichtig ist in diesem Zusammenhang auch die Qt Library die zwar nicht direkt zum KDE Projekt gehört aber eng mit dem KDE Projekt verbunden ist da Qt als Basis für die Entwicklung verwendet wird. Auf Anwenderebene sind also die KDE Applications und KDE Plasma die auf die KDE Framworks und Qt aufbauen wie auch in Abbildung \ref{fig:kde_overview} dargestellt.
+Im Folgenden wird nun die Architektur der vom Team des KDE Projekts entwickelten KDE Software Compilation (KDE SC) vorgestellt. Der wohl bekannteste Teil der KDE Software Compilation ist die Desktop Umgebung KDE Plasma. Dazu kommt eine große Anzahl an Anwendungen die KDE Applications. Diese werden vor allem in Verbindung mit KDE Plasma genutzt können aber auch unabhängig davon verwendet werden. Der dritte Bestandteil der KDE Software Compilation heißt KDE Frameworks und stellt eine Sammlung von Bibliotheken dar. Diese enthalten häufig benötigte Funktionen und machen es somit einfacher KDE Software zu entwickeln. Außerdem wird so das ständige neu entwickeln grundlegender Funktionen verhindert. Wichtig ist in diesem Zusammenhang auch die Qt Library die zwar nicht direkt zum KDE Projekt gehört aber eng mit dem KDE Projekt verbunden ist da Qt als Basis für die Entwicklung verwendet wird.
+Qt (http://www.qt.io/) ist im wesentlichen eine C++-Klassenbibliothek für die plattformübergreifende Programmierung grafischer Benutzeroberflächen die viele für die Entwicklung hilfreiche Funktionen bietet.
+%\url{https://en.wikipedia.org/wiki/Qt_(software)}
+%\url{http://www.qt.io/}
+Auf Anwenderebene sind also die KDE Applications und KDE Plasma die auf die KDE Framworks und Qt aufbauen wie auch in Abbildung \ref{fig:kde_overview} dargestellt.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.9\columnwidth]{images/KDE_Aufbau.png}
@@ -30,7 +23,7 @@ Im Folgenden wird nun die Architektur der vom Team des KDE Projekts entwickelten
 \end{figure}
 
 \subsection{KDE Frameworks 5}
-Das Ziel des unter der LGPL stehenden und vor allem in C++ und C entwickelten KDE Frameworks ist die Modularisierung. Aufbauend auf das als Basis genutzte Qt 5 stellt das aktuelle KDE Frameworks 5 grundlegende und für viele Anwendungsfälle nützliche Funktionen wie z.B. extra UI Elemente, Rechtschreibprüfung, usw. zu Verfügung. KDE Frameworks stellt somit durch seine verschiedenen Bibliotheken die Basis für KDE Plasma und KDE Applications dar und vereinfacht die Entwicklung, da auf erprobte Implementierungen zurückgriffen werden kann und unnötiges für jede Software neu entwickeln verhindert wird. Das KDE Frameworks 5 besteht dazu aus rund 60 einzelnen Bibliotheken mit verschiedenen Abhängigkeiten untereinander die möglichst Plattform unabhängig gehalten sind und versuchen so wenig wie möglich zusätzliche Abhängigkeiten zu verursachen. Für eine bessere Übersicht welche Abhängigkeiten existieren erfolgt dabei eine Einteilung ist nach "'Tier"' und "'Categorie"'. Abbildung \ref{fig:kde_frameworks} gibt einen groben Überblick für die Bestandteile der KDE Frameworks 5 und zu welchen "'Tier"' sie gehören.
+Das Ziel des unter der LGPL stehenden und vor allem in C++ und C entwickelten KDE Frameworks ist die Modularisierung. Aufbauend auf das als Basis genutzte Qt 5 stellt das aktuelle KDE Frameworks 5 grundlegende und für viele Anwendungsfälle nützliche Funktionen wie z.B. extra UI Elemente, Rechtschreibprüfung, usw. zu Verfügung. KDE Frameworks stellt somit durch seine verschiedenen Bibliotheken die Basis für KDE Plasma und KDE Applications dar und vereinfacht die Entwicklung, da auf erprobte Implementierungen zurückgriffen werden kann und unnötiges für jede Software neu entwickeln verhindert wird. Das KDE Frameworks 5 besteht dazu aus rund 60 einzelnen Bibliotheken mit verschiedenen Abhängigkeiten untereinander die möglichst Plattform unabhängig gehalten sind und versuchen so wenig wie möglich zusätzliche Abhängigkeiten zu verursachen. Für eine bessere Übersicht welche Abhängigkeiten existieren erfolgt dabei eine Einteilung ist nach "'Tier"' und "'Categorie"' die im Folgenden auch noch detaillierter vorgestellt wird. Abbildung \ref{fig:kde_frameworks} gibt einen groben Überblick für die Bestandteile der KDE Frameworks 5 und zu welchen "'Tier"' sie gehören.
 %\url{https://dot.kde.org/2013/09/25/frameworks-5}
 %https://www.kde.org/ https://dot.kde.org/ http://api.kde.org/
 
@@ -48,7 +41,7 @@ Die vielen einzelnen Bibliotheken von denen immer nur die benötigen verwendet w
 %\url{https://en.wikipedia.org/wiki/File:Evolution_and_development_of_KDE_software.svg}
 \begin{figure}[h]
 \centering
-\includegraphics[width=\columnwidth]{Evolution_and_development_of_KDE_software}
+\includegraphics[width=\columnwidth]{images/Evolution_and_development_of_KDE_software}
 \caption{KDE Frameworks}
 \label{fig:Evolution_and_development_of_KDE_software}
 \end{figure}
@@ -94,22 +87,18 @@ Jedes Framework lässt sich somit klar einordnen. Außerdem gibt es eine vom KDE
 	\label{fig:kde_matrix}
 \end{figure}
 
-
-\subsubsection{Qt Framework}
-C++-Klassenbibliothek für die plattformübergreifende Programmierung grafischer Benutzeroberflächen
-
-\url{https://en.wikipedia.org/wiki/Qt_(software)}
-
-\url{http://www.qt.io/}
-
 \subsection{KDE Plasma 5}
 KDE Plasma 5 stellt die bekannte für Linuxsysteme entwickelten Arbeitsplatzumgebung des KDE Projekts dar. Aufbauend auf Qt 5 und KDE Frameworks 5 findet die Entwicklung vor allem mit C++ und QML statt. 
 
 \url{https://en.wikipedia.org/wiki/KDE_Plasma_5}
 \url{http://www.heise.de/open/artikel/Plasma-5-Der-KDE-Desktop-in-neuem-Glanz-2260451.html}
 
+// TODO: Details zur Architektur (Mit Tool wenn es sich anbietet sonst für ein einfacheres Beispiel aus dem nächsten Abschnitt)
+
 \subsection{KDE Applications 15.12}
 Viele einzelne Anwendungen die zum KDE Projekt gehören werden unter den KDE Applications zusammengefasst. Das KDE Projekt Teil die über hundert Anwendungen deshalb zur besseren Übersicht deswegen die die Kategorien Development, Education, Games, Graphics, Internet, Multimedia, Office, System und Utilities ein. Die verschieden Anwendungen der KDE Applications bauen wie KDE Plasma auf Qt und KDE Frameworks auf. Davon Abgesehen sind die einzelnen Anwendungen aber relativ unabhängig vom gesamt Projekt gehalten weshalb auch die Architektur der einzelnen Programme betreffende Entscheidungen variieren. 
+
+// TODO: Eventuell ein Beispiel detaillierter
 
 \url{https://en.wikipedia.org/wiki/KDE_Applications}
 
