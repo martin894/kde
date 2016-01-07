@@ -1,13 +1,11 @@
-%\documentclass[10pt,a4paper,twocolumn]{article}
-%\usepackage[utf8]{inputenc}
-%\usepackage[ngerman]{babel}
-%\setlength{\parindent}{0cm}
-%\usepackage[colorlinks=true, urlcolor=black]{hyperref}
-%\usepackage{graphicx}
-%\begin{document}
+\documentclass[10pt,a4paper,twocolumn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\setlength{\parindent}{0cm}
+\usepackage[colorlinks=true, urlcolor=black]{hyperref}
+\usepackage{graphicx}
+\begin{document}
 	
-% TODO: KDE Plasma detailierter Beschreiben
-% TODO: Ein Teil / ein Subproject detailliert Beschreiben (Analyse mit Tool [cppdepend?])
 	
 \section{KDE Architecture}
 Im Folgenden wird nun die Architektur der vom Team des KDE Projekts entwickelten KDE Software Compilation (KDE SC) vorgestellt. Der wohl bekannteste Teil der KDE Software Compilation ist die Desktop Umgebung KDE Plasma. Dazu kommt eine große Anzahl an Anwendungen die KDE Applications. Diese werden vor allem in Verbindung mit KDE Plasma genutzt können aber auch unabhängig davon verwendet werden. Der dritte Bestandteil der KDE Software Compilation heißt KDE Frameworks und stellt eine Sammlung von Bibliotheken dar. Diese enthalten häufig benötigte Funktionen und machen es somit einfacher KDE Software zu entwickeln. Außerdem wird so das ständige neu entwickeln grundlegender Funktionen verhindert. Wichtig ist in diesem Zusammenhang auch die Qt Library die zwar nicht direkt zum KDE Projekt gehört aber eng mit dem KDE Projekt verbunden ist da Qt als Basis für die Entwicklung verwendet wird.
@@ -29,12 +27,12 @@ Das Ziel des unter der LGPL stehenden und vor allem in C++ und C entwickelten KD
 
 %\url{https://dot.kde.org/2014/01/07/frameworks-5-tech-preview}
 %\url{https://dot.kde.org/sites/dot.kde.org/files/kf5_big_0.png}
-\begin{figure}[h]
+\begin{figure*}[h]
 	\centering
-	\includegraphics[width=\columnwidth]{images/kf5_big_0.png}
+	\includegraphics[width=0.95\textwidth]{images/kf5_big_0.png}
 	\caption{KDE Frameworks}
 	\label{fig:kde_frameworks}
-\end{figure}
+\end{figure*}
 
 Ziel der Aufteilung in viele einzelne in KDE Frameworks gebündelte Bibliotheken ist dabei dass es leichter möglich wird nur auf Teile der KDE Frameworks aufzubauen.
 Die vielen einzelnen Bibliotheken von denen immer nur die benötigen verwendet werden ist dabei eine noch recht neue für die Architektur der Software sehr wichtige Entwicklung die erst mit KDE Frameworks 5 im Dezember 2013 eingeführt wurde. KDE Frameworks in Version 4 trug noch den Namen KDE Platfrom baute noch auf Qt 4 und war im Prinzip nur eine einzige große KDElibs Library wie sie schon in den Versionen davor existierte.
@@ -88,18 +86,55 @@ Jedes Framework lässt sich somit klar einordnen. Außerdem gibt es eine vom KDE
 \end{figure}
 
 \subsection{KDE Plasma 5}
-KDE Plasma 5 stellt die bekannte für Linuxsysteme entwickelten Arbeitsplatzumgebung des KDE Projekts dar. Aufbauend auf Qt 5 und KDE Frameworks 5 findet die Entwicklung vor allem mit C++ und QML statt. 
 
-\url{https://en.wikipedia.org/wiki/KDE_Plasma_5}
-\url{http://www.heise.de/open/artikel/Plasma-5-Der-KDE-Desktop-in-neuem-Glanz-2260451.html}
+KDE bietet zwei verschiedene Arbeitsflächen an. Jede ist dabei auf den Workflow und das entsprechend verwendete Gerät spezialisiert. So gibt es eine Arbeitsfläche für den normalen Schreibtisch-PC und Laptop-Computer und eine Arbeitsfläche für kleine Computer, wie beispielsweise Netbooks. Beide sind jeweils auf die entsprechenden Anforderungen angepasst worden. In Abbildung \ref{fig:kde_desktop} und Abbildung \ref{fig:kde_netbook} sind beide Arbeitsflächen zu sehen \cite{KDEWorkspaces}.
 
-// TODO: Details zur Architektur (Mit Tool wenn es sich anbietet sonst für ein einfacheres Beispiel aus dem nächsten Abschnitt)
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\columnwidth]{images/general-desktop.png}
+	\caption{KDE Plasma Desktop Arbeitsfläche \cite{KDEWorkspaces}}
+	\label{fig:kde_desktop}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\columnwidth]{images/netbook.png}
+	\caption{KDE Plasma Netbook Arbeitsfläche \cite{KDEWorkspaces}}
+	\label{fig:kde_netbook}
+\end{figure}
+
+
+Seit KDE 4 wird die Arbeitsfläche in KDE Plasma genannt. Die neueste Version ist KDE Plasma 5 und stellt die bekannte für Linuxsysteme entwickelten Arbeitsplatzumgebung des KDE Projekts dar. Aufbauend auf Qt 5 und KDE Frameworks 5 findet die Entwicklung vor allem mit C++ und QML statt. Die Implementierung basiert auf dem Qt Graphics View Framework. Die benötigen Klassen befinden sich in der \textit{libplasma} Bibliothek. Im Folgenden werden einige Klassen vorgestellt die eine zentrale Rolle bei der Entwicklung spielen \cite{KDEPlasma}.
+
+\begin{itemize}
+	\item \textbf{Corona}: wird von \textit{QGraphicsScene} abgeleitet und bietet die Funktionalität für das Hinzufügen von \textit{Applets} und \textit{Karamba Themes}
+	\item \textbf{Widget}: wird von \textit{QGraphicsItem} abgeleitet und funktioniert wie simple Elemente (zum Beispiel Icons oder auch Buttons) in der Arbeitsfläche
+	\item \textbf{Applet}: wird von \textit{Widget} abgeleitet und implementiert komplexere Funktionalitäten, wie beispielsweise eine Uhr oder Systemüberwachung. Ein Beispiel für die Uhr ist in Abbildung \ref{fig:kde_desktop} zu sehen.
+	\item \textbf{DataEngine}: die \textit{DataEngine} dient dazu die Daten für ein Applet bereitzustellen, damit diese angezeigt werden können. Dies gilt für alle möglichen Daten.
+\end{itemize}
+
+KDE Plasma 5 ist eine moderne Arbeitsfläche, welche alle nötigen Werkzeuge bereitstellt um effizient und produktiv arbeiten zu können. Weiterhin wird auch Wert auf das Aussehen gelegt. Mithilfe der neuen Technologien die verwendet werden, wird dieses Ziel auch erreicht. Dabei soll das Aussehen keinesfalls ablenken, sondern den Nutzer bei seiner Arbeit unterstützen. \cite{KDEPlasma}
+
+Weiterhin soll dem Nutzer die Möglichkeit gegeben werden den Desktop nach seinem Belieben zu gestalten. Dies wird durch Widgets ermöglicht, wovon tausende online zu Verfügung stehen. Auf Wunsch kann der Nutzer auch eigene Widgets entwickeln. Hierfür stehen Tutorials zur Verfügung.
+
 
 \subsection{KDE Applications 15.12}
-Viele einzelne Anwendungen die zum KDE Projekt gehören werden unter den KDE Applications zusammengefasst. Das KDE Projekt Teil die über hundert Anwendungen deshalb zur besseren Übersicht deswegen die die Kategorien Development, Education, Games, Graphics, Internet, Multimedia, Office, System und Utilities ein. Die verschieden Anwendungen der KDE Applications bauen wie KDE Plasma auf Qt und KDE Frameworks auf. Davon Abgesehen sind die einzelnen Anwendungen aber relativ unabhängig vom gesamt Projekt gehalten weshalb auch die Architektur der einzelnen Programme betreffende Entscheidungen variieren. 
+Viele einzelne Anwendungen die zum KDE Projekt gehören werden unter den KDE Applications zusammengefasst. Das KDE Projekt teils die über hundert Anwendungen deshalb zur besseren Übersicht in folgende Kategorien \cite{KDEApps}:
 
-// TODO: Eventuell ein Beispiel detaillierter
+\begin{itemize}
+	\item \textbf{Entwicklung}: dazu gehören zum Beispiel die Apps KDevelop, KLinkStatus und Umbrello.
+	\item \textbf{Bildung}: dazu gehören zum Beispiel die Apps KTouch, Step und Marble.
+	\item \textbf{Spiele}: dazu gehören zum Beispiel die Apps KMines, Kolf und KLines.
+	\item \textbf{Graphik}: dazu gehören zum Beispiel die Apps KSnapshot, Okular und KRuler.
+	\item \textbf{Internet}: dazu gehören zum Beispiel die Apps Konqueror, KTorrent und KMail.
+	\item \textbf{Multimedia}: dazu gehören zum Beispiel die Apps Amarok, KMix und KsCD.
+	\item \textbf{Büro}: dazu gehören zum Beispiel die Apps Flow, Kontact und Sheets.
+	\item \textbf{System}: dazu gehören zum Beispiel die Apps Dolphin, KInfoCenter und KSystemLog.
+	\item \textbf{Utilities}: dazu gehören zum Beispiel die Apps Ark, Kate und KCalc.
+\end{itemize}
 
-\url{https://en.wikipedia.org/wiki/KDE_Applications}
+Die verschieden Anwendungen der KDE Applications bauen, wie KDE Plasma, auf Qt und KDE Frameworks auf. Davon Abgesehen sind die einzelnen Anwendungen aber relativ unabhängig vom gesamten Projekt gehalten, weshalb auch die Architektur der einzelnen Programme oft unterschiedlich ist. 
 
-%\end{document}
+
+
+\end{document}
