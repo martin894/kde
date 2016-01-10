@@ -1,0 +1,23 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: paper.aux
+The style file: abbrv.bst
+Database file #1: quellen.bib
+Repeated entry---line 33 of file quellen.bib
+ : @misc{kdeplasma5
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 40 of file quellen.bib
+ : @misc{kdeversionenwiki
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 162 of file quellen.bib
+ : @misc{1
+ :        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 169 of file quellen.bib
+ : @misc{1
+ :        ,
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "kdeversion1"
+Warning--I didn't find a database entry for "5"
+Warning--I didn't find a database entry for "6"
+(There were 4 error messages)
